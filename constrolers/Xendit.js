@@ -33,4 +33,17 @@ router.post("/create-qris", async (req, res) => {
   }
 });
 
+router.post("/create-retail-outlet", async (req, res) => {
+  try {
+    const data = req.body;
+    const { RetailOutlet } = xendit_instance;
+    const retailOutletSpecificOptions = {};
+    const ro = new RetailOutlet(retailOutletSpecificOptions);
+    const xendit_resp = await ro.createFixedPaymentCode(data);
+    res.status(200).json(xendit_resp);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 module.exports = router;
