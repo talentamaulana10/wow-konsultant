@@ -32,25 +32,4 @@ module.exports = {
       }
     });
   },
-  autoDebitWallet(data) {
-    return new Promise(async (resolve, reject) => {
-      try {
-        resolve(null);
-      } catch (error) {
-        reject(null);
-      }
-    });
-  },
-  redirectDebitWallet(data) {
-    return new Promise(async (resolve, reject) => {
-      try {
-      } catch (error) {}
-    });
-  },
-  callbackRedirectDebitWallet(data) {
-    return new Promise(async (resolve, reject) => {
-      try {
-      } catch (error) {}
-    });
-  },
 };

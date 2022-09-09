@@ -50,17 +50,22 @@ router.post("/create-retail-outlet", async (req, res) => {
 
 router.post("/create-wallet-charge", async (req, res) => {
   try {
-    const data = req.body;
-    const custResp = await WalletService.createCustomer({
-      reference_id: uuidv4(),
-      type: data.customer.type,
-      individual_detail: {
-        given_names: data.customer.givenNames,
-        surname: data.customer.surname,
+    const { EWallet } = xendit_instance;
+    const eWalletSpecificOpt = {};
+    const ew = new EWallet(eWalletSpecificOpt);
+    const xendit_resp = await ew.createEWalletCharge({
+      referenceID: uuidv4(),
+      currency: "IDR",
+      amount: req.body.amount,
+      checkoutMethod: "ONE_TIME_PAYMENT",
+      channelCode: req.body.channelCode,
+      channelProperties: {
+        mobileNumber: req.body.mobileNumber,
+        successRedirectURL: req.body.successRedirectURL,
       },
-      email: data.customer.email,
-      mobile_number: data.customer.mobileNumber,
+      metadata: req.body.metadata,
     });
+    res.status(200).json(xendit_resp);
   } catch (error) {
     res.status(400).json(error);
   }
