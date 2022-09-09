@@ -5,8 +5,8 @@ const WebhookStorage = require("../models/WebhookStorage");
 router.post("/e-wallet", async (req, res) => {
   try {
     const newWebhookStorage = new WebhookStorage({
-      id: req.body.id,
-      callbackDto: JSON.stringify(req.body),
+      id: req.body.data.id,
+      callbackDto: JSON.stringify(req.body.data),
       type: "ewallet",
     });
     const response = await newWebhookStorage.save();
