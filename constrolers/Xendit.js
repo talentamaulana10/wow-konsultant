@@ -61,7 +61,6 @@ router.post("/create-wallet-charge", async (req, res) => {
       email: data.customer.email,
       mobile_number: data.customer.mobileNumber,
     });
-    // const paymentResponse = await WalletService.redirectDebitWallet();
   } catch (error) {
     res.status(400).json(error);
   }
