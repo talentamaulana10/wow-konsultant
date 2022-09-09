@@ -17,4 +17,19 @@ router.post("/e-wallet", async (req, res) => {
   }
 });
 
+router.post("/ovo-e-wallet", async (req, res) => {
+  try {
+    const newWebhookStorage = new WebhookStorage({
+      id: req.body.id,
+      callbackDto: JSON.stringify(req.body),
+      type: "ovo-ewallet",
+    });
+    const response = await newWebhookStorage.save();
+    console.log(response);
+    res.status(200).json("success");
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 module.exports = router;
