@@ -15,7 +15,7 @@ module.exports = {
         const xendit_resp = await q.createCode({
           externalID: uuidv4(),
           amount: data.amount,
-          type: "STATIC",
+          type: "DYNAMIC",
           callbackURL: "https://yourwebsite.com/callback",
         });
         resolve(xendit_resp);

@@ -37,7 +37,7 @@ router.post("/retail-outlet", async (req, res) => {
 
 router.post("/wallet/one-time-payment-ovo", async (req, res) => {
   try {
-    const { data } = req.body;
+    const data = req.body;
     const resp = await EWalletServices.createOtpOVO(data);
     res.status(200).json(resp);
   } catch (error) {
@@ -47,7 +47,7 @@ router.post("/wallet/one-time-payment-ovo", async (req, res) => {
 
 router.post("/wallet/one-time-payment", async (req, res) => {
   try {
-    const { data } = req.body;
+    const data = req.body;
     const resp = await EWalletServices.createOtp(data);
     res.status(200).json(resp);
   } catch (error) {

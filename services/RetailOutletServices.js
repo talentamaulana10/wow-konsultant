@@ -17,7 +17,6 @@ module.exports = {
           externalID: uuidv4(),
           name: data.name,
           retailOutletName: data.retailOutletName,
-          paymentCode: "WKST",
           isSingleUse: true,
         });
         resolve(xendit_resp);
