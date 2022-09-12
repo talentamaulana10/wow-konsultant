@@ -24,9 +24,9 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use("/xendit", Xendit);
+app.use("/middleware/v1/xendit/", Xendit);
 
-app.use("/webhook", Webhook);
+app.use("/middleware/v1/webhook-pools/", Webhook);
 
 app.get("/", (req, res) => {
   res.send("hello");

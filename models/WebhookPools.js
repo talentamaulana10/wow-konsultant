@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const WebhookStorageSchema = new schema({
+const WebhookPoolSchema = new schema({
   id: {
     type: String,
     required: true,
@@ -16,7 +16,7 @@ const WebhookStorageSchema = new schema({
   },
 });
 
-module.exports = WebhookStorage = mongoose.model(
-  "webhook_storage",
-  WebhookStorageSchema
+module.exports = WebhookPool = mongoose.model(
+  "webhook_pool",
+  WebhookPoolSchema
 );

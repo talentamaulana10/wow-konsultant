@@ -1,32 +1,22 @@
 const express = require("express");
+const WebhookPoolServices = require("../services/WebhookPoolServices");
 const router = express.Router();
-const WebhookStorage = require("../models/WebhookStorage");
 
-router.post("/e-wallet", async (req, res) => {
+router.post("/e-wallet-ovo", async (req, res) => {
   try {
-    const newWebhookStorage = new WebhookStorage({
-      id: req.body.data.id,
-      callbackDto: JSON.stringify(req.body.data),
-      type: "ewallet",
-    });
-    const response = await newWebhookStorage.save();
-    console.log(response);
-    res.status(200).json("success");
+    const data = req.body;
+    const resp = WebhookPoolServices.createEWalletOVO(data);
+    res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);
   }
 });
 
-router.post("/ovo-e-wallet", async (req, res) => {
+router.post("/e-wallet", async (req, res) => {
   try {
-    const newWebhookStorage = new WebhookStorage({
-      id: req.body.id,
-      callbackDto: JSON.stringify(req.body),
-      type: "ovo-ewallet",
-    });
-    const response = await newWebhookStorage.save();
-    console.log(response);
-    res.status(200).json("success");
+    const data = req.body;
+    const resp = WebhookPoolServices.createEWallet(data);
+    res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);
   }
