@@ -5,7 +5,7 @@ const router = express.Router();
 router.post("/e-wallet-ovo", async (req, res) => {
   try {
     const data = req.body;
-    const resp = WebhookPoolServices.createEWalletOVO(data);
+    const resp = await WebhookPoolServices.createEWalletOVO(data);
     res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);
@@ -15,7 +15,7 @@ router.post("/e-wallet-ovo", async (req, res) => {
 router.post("/e-wallet", async (req, res) => {
   try {
     const data = req.body;
-    const resp = WebhookPoolServices.createEWallet(data);
+    const resp = await WebhookPoolServices.createEWallet(data);
     res.status(200).json(resp);
   } catch (error) {
     res.status(400).json(error);

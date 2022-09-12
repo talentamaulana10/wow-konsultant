@@ -4,7 +4,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const newWP = new WebhookPool({
-          callbackDto: JSON.stringify(data.callbackDto),
+          callbackDto: JSON.stringify(data),
           id: data.id,
           type: "EW_OVO",
         });
@@ -19,7 +19,7 @@ module.exports = {
     return new Promise(async (resolve, reject) => {
       try {
         const newWP = new WebhookPool({
-          callbackDto: JSON.stringify(data.callbackDto),
+          callbackDto: JSON.stringify(data),
           id: data.data.id,
           type: "EW",
         });
