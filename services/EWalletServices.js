@@ -50,4 +50,17 @@ module.exports = {
       }
     });
   },
+  async getOne(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { EWallet } = xendit_instance;
+        const xendit_resp = new EWallet().getEWalletChargeStatus({
+          chargeID: id,
+        });
+        resolve(xendit_resp);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };

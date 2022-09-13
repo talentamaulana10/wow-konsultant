@@ -24,4 +24,17 @@ module.exports = {
       }
     });
   },
+  async getOne(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { QrCode } = xendit_instance;
+        const xendit_resp = new QrCode().getCode({
+          externalID: id,
+        });
+        resolve(xendit_resp);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };

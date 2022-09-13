@@ -25,4 +25,15 @@ module.exports = {
       }
     });
   },
+  async getOne(id) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const { VirtualAcc } = xendit_instance;
+        const xendit_resp = new VirtualAcc().getFixedVA({ id });
+        resolve(xendit_resp);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  },
 };

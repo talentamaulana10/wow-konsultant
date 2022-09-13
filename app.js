@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Xendit = require("./constrolers/Xendit");
 const Webhook = require("./constrolers/Webhook");
+const Order = require("./constrolers/Order");
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -24,11 +25,11 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+app.use("/api/v0/order", Order);
+
 app.use("/middleware/v1/xendit/", Xendit);
 
 app.use("/middleware/v1/webhook-pools/", Webhook);
-
-//
 
 app.get("/", (req, res) => {
   res.send("hello");

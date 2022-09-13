@@ -4,12 +4,17 @@ const VirtualAccountServices = require("../services/VirtualAccountServices");
 const QrisService = require("../services/QrisService");
 const RetailOutletServices = require("../services/RetailOutletServices");
 const EWalletServices = require("../services/EWalletServices");
+const OrderServices = require("../services/OrderServices");
 
 router.post("/virtual-account", async (req, res) => {
   try {
     const data = req.body;
-    const resp = await VirtualAccountServices.create(data);
-    res.status(200).json(resp);
+    const xenditResp = await VirtualAccountServices.create(data);
+    const orderResp = await OrderServices.create({
+      paymentId: xenditResp.id,
+      paymentType: "va",
+    });
+    res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -18,8 +23,12 @@ router.post("/virtual-account", async (req, res) => {
 router.post("/qris", async (req, res) => {
   try {
     const data = req.body;
-    const resp = await QrisService.createDynamicQRIS(data);
-    res.status(200).json(resp);
+    const xenditResp = await QrisService.createDynamicQRIS(data);
+    const orderResp = await OrderServices.create({
+      paymentId: xenditResp.external_id,
+      paymentType: "qris",
+    });
+    res.status(200).json({ xenditResp, orderResp });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -28,8 +37,12 @@ router.post("/qris", async (req, res) => {
 router.post("/retail-outlet", async (req, res) => {
   try {
     const data = req.body;
-    const resp = await RetailOutletServices.create(data);
-    res.status(200).json(resp);
+    const xenditResp = await RetailOutletServices.create(data);
+    const orderResp = await OrderServices.create({
+      paymentId: xenditResp.id,
+      paymentType: "ro",
+    });
+    res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -38,8 +51,12 @@ router.post("/retail-outlet", async (req, res) => {
 router.post("/wallet/one-time-payment-ovo", async (req, res) => {
   try {
     const data = req.body;
-    const resp = await EWalletServices.createOtpOVO(data);
-    res.status(200).json(resp);
+    const xenditResp = await EWalletServices.createOtpOVO(data);
+    const orderResp = await OrderServices.create({
+      paymentId: xenditResp.id,
+      paymentType: "ew",
+    });
+    res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
     res.status(400).json(error);
   }
@@ -48,8 +65,12 @@ router.post("/wallet/one-time-payment-ovo", async (req, res) => {
 router.post("/wallet/one-time-payment", async (req, res) => {
   try {
     const data = req.body;
-    const resp = await EWalletServices.createOtp(data);
-    res.status(200).json(resp);
+    const xenditResp = await EWalletServices.createOtp(data);
+    const orderResp = await OrderServices.create({
+      paymentId: xenditResp.id,
+      paymentType: "ew",
+    });
+    res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
     res.status(400).json(error);
   }

@@ -1,0 +1,5 @@
+# order -> payment-type :
+- va : virtual account
+- ew : ewallet
+- ro : retail outlet
+- qris : scan qr qris
