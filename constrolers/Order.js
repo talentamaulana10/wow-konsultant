@@ -9,7 +9,7 @@ router.get("/:id", async (req, res) => {
       paymentId: order.paymentId,
       paymentType: order.paymentType,
     });
-    res.status(200).json(xenditResp);
+    res.status(200).json({ order, xenditResp });
   } catch (error) {
     res.status(400).json(error);
   }
