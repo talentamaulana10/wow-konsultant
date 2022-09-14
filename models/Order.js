@@ -10,10 +10,14 @@ const OrderSchema = new schema({
     type: String,
     required: true,
   },
-  paymentType : {
-    type : String,
-    required : true
-  }
+  paymentType: {
+    type: String,
+    required: true,
+  },
+  totalOrder: {
+    type: Number,
+    required: true,
+  },
 });
 
 module.exports = Order = mongoose.model("order", OrderSchema);

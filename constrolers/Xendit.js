@@ -13,6 +13,7 @@ router.post("/virtual-account", async (req, res) => {
     const orderResp = await OrderServices.create({
       paymentId: xenditResp.id,
       paymentType: "va",
+      totalOrder: data.totalOrder,
     });
     res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
@@ -27,6 +28,7 @@ router.post("/qris", async (req, res) => {
     const orderResp = await OrderServices.create({
       paymentId: xenditResp.external_id,
       paymentType: "qris",
+      totalOrder: data.totalOrder,
     });
     res.status(200).json({ xenditResp, orderResp });
   } catch (error) {
@@ -41,6 +43,7 @@ router.post("/retail-outlet", async (req, res) => {
     const orderResp = await OrderServices.create({
       paymentId: xenditResp.id,
       paymentType: "ro",
+      totalOrder: data.totalOrder,
     });
     res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
@@ -55,6 +58,7 @@ router.post("/wallet/one-time-payment-ovo", async (req, res) => {
     const orderResp = await OrderServices.create({
       paymentId: xenditResp.id,
       paymentType: "ew",
+      totalOrder: data.totalOrder,
     });
     res.status(200).json({ orderResp, xenditResp });
   } catch (error) {
@@ -67,8 +71,10 @@ router.post("/wallet/one-time-payment", async (req, res) => {
     const data = req.body;
     const xenditResp = await EWalletServices.createOtp(data);
     const orderResp = await OrderServices.create({
+      customId: xenditResp.reference_id,
       paymentId: xenditResp.id,
       paymentType: "ew",
+      totalOrder: data.totalOrder,
     });
     res.status(200).json({ orderResp, xenditResp });
   } catch (error) {

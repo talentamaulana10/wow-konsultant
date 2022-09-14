@@ -15,4 +15,16 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+router.put("/:id/change-payment", async (req, res) => {
+  try {
+    const resp = await OrderServices.changePaymentMethod(
+      req.body,
+      req.params.id
+    );
+    res.status(200).json(resp);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+});
+
 module.exports = router;

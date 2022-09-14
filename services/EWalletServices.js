@@ -31,17 +31,18 @@ module.exports = {
   async createOtp(data) {
     return new Promise(async (resolve, reject) => {
       try {
+        const uid = uuidv4();
         const { EWallet } = xendit_instance;
         const eWalletSpecificOpt = {};
         const ew = new EWallet(eWalletSpecificOpt);
         const xendit_resp = await ew.createEWalletCharge({
-          referenceID: uuidv4(),
+          referenceID: uid,
           currency: "IDR",
           amount: data.amount,
           checkoutMethod: "ONE_TIME_PAYMENT",
           channelCode: data.channelCode,
           channelProperties: {
-            successRedirectURL: "https://www.google.com",
+            successRedirectURL: "http://localhost:3000/order/" + uid,
           },
         });
         resolve(xendit_resp);
